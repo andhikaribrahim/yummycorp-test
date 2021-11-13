@@ -91,7 +91,7 @@ export default function Home() {
 
       <div className="container my-6 mx-auto max-w-lg">
         <div className="flex flex-col items-center">
-          <div ref={ball} style={{ minHeight: '100vh' }}>
+          <div ref={ball} style={{ minHeight: '100vh', width: '100%' }}>
             <Ball color={color} scale={scale} />
           </div>
 
