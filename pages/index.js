@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styled, { keyframes } from 'styled-components';
-import { useReducer, useRef, useState } from 'react';
+import { useReducer, useRef } from 'react';
 import Draggable from 'react-draggable';
 import { useGesture } from 'react-use-gesture';
 
@@ -70,11 +70,9 @@ export default function Home() {
     onPinch: ({ offset: [d], }) => {
       if (d < 0) return;
 
-      const ratio = d / 10;
-
-      if (ratio > 0 && ratio <= 280) {
-        ball.current.style.width = `${ratio}px`;
-        ball.current.style.height = `${ratio}px`;
+      if (d > 0 && d <= 280) {
+        ball.current.style.width = `${d}px`;
+        ball.current.style.height = `${d}px`;
       }
     }
   }, {
