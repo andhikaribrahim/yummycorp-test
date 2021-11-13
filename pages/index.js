@@ -1,4 +1,9 @@
 import Head from 'next/head'
+import styled from 'styled-components';
+
+const Title = styled.div.attrs(() => ({
+  className: `block text-xl text-gray-600 mt-12 font-semibold text-center uppercase leading-normal`
+}))``;
 
 export default function Home() {
   return (
@@ -11,9 +16,9 @@ export default function Home() {
 
       <div className="flex flex-row items-center flex-1 flex-shrink-0">
         <div className="container min-h-screen">
-          <div className="block text-xl text-gray-600 mt-12 font-semibold text-center uppercase leading-normal">
+          <Title>
             This is nextjs boilerplate
-          </div>
+          </Title>
         </div>
       </div>
     </div>
