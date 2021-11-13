@@ -39,12 +39,12 @@ const Slider = styled.div.attrs(() => ({
 const Ball = styled.div.attrs(() => ({
   className: `flex rounded-full`
 }))`
-  height: ${props => (props.scale + 48)}px;
-  width: ${props => props.scale + 48}px;
+  height: 48px;
+  width: 48px;
   background-color: ${props => `hsla(${Object.values(props.color).join(',')})`};
   touch-action: 'none';
   animation: ${bounce} 1s 0.6s ease-in infinite alternate;
-  transition: width .375s ease-in, height .375 ease-in;
+  transition: width .385s ease-in-out, height .385s ease-in-out;
 `;
 
 export default function Home() {
@@ -64,20 +64,23 @@ export default function Home() {
     handleSetHue(Math.ceil(cursorPosition * ratio));
   };
 
+  const ballContainer = useRef(null);
   const ball = useRef(null);
-  const [scale, setScale] = useState(1);
   useGesture({
     onPinch: ({ offset: [d], }) => {
-      if (d < 0) {
-        return 1;
-      }
+      if (d < 0) return;
+
       const ratio = d / 10;
-      setScale(1 + ratio);
+
+      if (ratio > 0 && ratio <= 280) {
+        ball.current.style.width = `${ratio}px`;
+        ball.current.style.height = `${ratio}px`;
+      }
     }
   }, {
-    domTarget: ball,
+    domTarget: ballContainer,
     eventOptions: { passive: false },
-    pinch: { scaleBounds: { min: 0.5, max: 2 }, rubberband: true },
+    pinch: { scaleBounds: { min: 1, max: 2 }, rubberband: true },
   });
 
   return (
@@ -91,8 +94,8 @@ export default function Home() {
 
       <div className="container my-6 mx-auto max-w-lg">
         <div className="flex flex-col items-center">
-          <div className="flex flex-row justify-center" ref={ball} style={{ minHeight: '100vh', width: '100%' }}>
-            <Ball color={color} scale={scale} />
+          <div className="flex flex-row justify-center overflow-hidden" ref={ballContainer} style={{ minHeight: '100vh', width: '100%' }}>
+            <Ball color={color} ref={ball} />
           </div>
 
           <HueBackground ref={boundRect}>
