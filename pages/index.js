@@ -71,7 +71,7 @@ export default function Home() {
       if (d < 0) {
         return 1;
       }
-      const ratio = d / 50;
+      const ratio = d / 10;
       setScale(1 + ratio);
     }
   }, {
