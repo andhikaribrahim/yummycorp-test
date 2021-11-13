@@ -1,5 +1,5 @@
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: [] // include your images domain if it hosted outside nextjs
   },
